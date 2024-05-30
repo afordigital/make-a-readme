@@ -27,8 +27,10 @@ function App() {
 
   return (
     <div className="w-screen h-screen overflow-hidden flex text-white items-center bg-[#293456]">
-      <div className="min-w-[400px] bg-[#293357] relative h-full">
-        <div className="w-full flex gap-x-8 p-4">
+      <Toaster />
+
+      <div className="min-w-[400px] bg-[#293357] relative flex flex-col gap-4 h-full p-4">
+        <div className="w-full flex gap-x-8">
           <Button
             variant={mode === MODE.DRAFT ? VARIANT.PRIMARY : VARIANT.SECONDARY}
             onClick={() => {
@@ -49,16 +51,16 @@ function App() {
         {mode === MODE.DRAFT ? (
           <DraggableSection />
         ) : (
-          <div className="flex flex-col p-4">
+          <div className="flex flex-col p-4 overflow-auto">
             {placeholders.map((section) => {
               return <Section key={section.title} title={section.title} />;
             })}
           </div>
         )}
       </div>
-      <Toaster />
-      <div className="flex flex-col gap-8 w-full px-20">
-        <div className="relative w-full flex  gap-4">
+
+      <div className="flex flex-col gap-8 w-full px-20 h-full p-4">
+        <div className="relative w-full flex gap-4">
           <Button
             onClick={() => handleScreenViewClick(SCREEN.EDITOR)}
             variant={

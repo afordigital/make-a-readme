@@ -7,7 +7,7 @@ export const Preview = () => {
   const aux = sections.map((section) => section.content);
 
   return (
-    <div className="w-[50%] flex flex-col gap-4">
+    <div className="flex flex-1 flex-col gap-4">
       {aux.map((item) => (
         <ReactMarkdown>{item}</ReactMarkdown>
       ))}
