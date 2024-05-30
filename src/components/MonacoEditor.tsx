@@ -17,7 +17,7 @@ export const MonacoEditor = () => {
   console.log(activeSection);
 
   return (
-    <div className="w-full">
+    <div className="flex-1 overflow-hidden">
       <Editor
         height="90vh"
         theme="vs-dark"

@@ -19,7 +19,7 @@ export const Section = ({ title }: SectionProps) => {
   };
 
   return (
-    <div className="flex min-h-[20px] py-5 my-2 w-full items-center border-2 border-[#99ABE4] gap-4 rounded-md px-4 bg-[#617ACA]">
+    <div className="flex py-5 my-2 w-full items-center border-2 border-[#99ABE4] gap-4 rounded-md px-4 bg-[#617ACA]">
       <button
         onClick={() => {
           handleAddSection(title);
