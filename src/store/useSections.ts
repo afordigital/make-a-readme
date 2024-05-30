@@ -1,13 +1,15 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-type Section = {
-  id: string;
+export type Section = {
+  title: string;
   content: string;
 };
 
 type SectionStore = {
   sections: Section[];
+  activeSection: Section;
+  setActiveSection: (sectionToUpdate: Section) => void;
   addSection: (sectionToAdd: Section) => void;
   updateSection: (sectionToUpdate: Section) => void;
   deleteSection: (sectionToDelete: Section) => void;
@@ -18,6 +20,16 @@ export const useSectionsStore = create<SectionStore>()(
     (set) => ({
       sections: [],
 
+      activeSection: {
+        title: "",
+        content: "",
+      },
+
+      setActiveSection: (newActiveSection) =>
+        set(() => ({
+          activeSection: newActiveSection,
+        })),
+
       addSection: (sectionToAdd) =>
         set((prev) => ({
           sections: [...prev.sections, sectionToAdd],
@@ -26,14 +38,14 @@ export const useSectionsStore = create<SectionStore>()(
       updateSection: (sectionToUpdate) =>
         set((prev) => ({
           sections: prev.sections.map((section) =>
-            section.id === sectionToUpdate.id ? sectionToUpdate : section
+            section.title === sectionToUpdate.title ? sectionToUpdate : section
           ),
         })),
 
       deleteSection: (sectionToDelete) =>
         set((prev) => ({
           sections: prev.sections.filter(
-            (section) => section.id !== sectionToDelete.id
+            (section) => section.title !== sectionToDelete.title
           ),
         })),
     }),

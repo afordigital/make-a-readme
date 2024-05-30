@@ -1,20 +1,32 @@
 import Editor from "@monaco-editor/react";
+import { useSectionsStore } from "../store/useSections";
 
-type MonacoProps = {
-  data: string;
-  setData: (data: string) => void;
-};
+export const MonacoEditor = () => {
+  const { activeSection, updateSection, setActiveSection } = useSectionsStore();
 
-export const MonacoEditor = ({ data, setData }: MonacoProps) => {
+  const handleUpdateSection = (value: string) => {
+    const newActiveSection = {
+      title: activeSection.title,
+      content: value,
+    };
+
+    setActiveSection(newActiveSection);
+    updateSection(newActiveSection);
+  };
+
+  console.log(activeSection);
+
   return (
-    <div>
+    <div className="w-full">
       <Editor
         height="90vh"
         theme="vs-dark"
         defaultLanguage="markdown"
-        defaultValue={data}
-        onChange={(e) => {
-          setData(e || "");
+        defaultValue={activeSection.content}
+        value={activeSection.content}
+        onChange={(value) => {
+          if (!value) return;
+          handleUpdateSection(value);
         }}
       />
     </div>

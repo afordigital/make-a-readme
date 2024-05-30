@@ -5,9 +5,11 @@ import { Preview } from "./components/Preview";
 import { Button } from "./components/common/Button";
 import { MODE, SCREEN, VARIANT } from "./components/constants";
 
-function App() {
-  const [data, setData] = useState("// some comment");
+import placeholders from "./placeholders.json";
+import { Section } from "./components/Section";
+import { Toaster } from "sonner";
 
+function App() {
   const [mode, setMode] = useState(MODE.DRAFT);
   const [screenView, setScreenView] = useState([SCREEN.EDITOR, SCREEN.PREVIEW]);
 
@@ -22,8 +24,6 @@ function App() {
       setScreenView([...screenView, view]);
     }
   };
-
-  console.log(screenView);
 
   return (
     <div className="w-screen h-screen overflow-hidden flex text-white items-center bg-[#293456]">
@@ -46,10 +46,19 @@ function App() {
             Add Section
           </Button>
         </div>
-        <DraggableSection></DraggableSection>
+        {mode === MODE.DRAFT ? (
+          <DraggableSection />
+        ) : (
+          <div className="flex flex-col p-4">
+            {placeholders.map((section) => {
+              return <Section key={section.title} title={section.title} />;
+            })}
+          </div>
+        )}
       </div>
-      <div className="grid grid-cols-2 gap-8 w-full px-20">
-        <div className="relative w-full flex flex-col gap-4">
+      <Toaster />
+      <div className="flex flex-col gap-8 w-full px-20">
+        <div className="relative w-full flex  gap-4">
           <Button
             onClick={() => handleScreenViewClick(SCREEN.EDITOR)}
             variant={
@@ -60,11 +69,6 @@ function App() {
           >
             Editor
           </Button>
-          {screenView.includes(SCREEN.EDITOR) && (
-            <MonacoEditor data={data} setData={setData} />
-          )}
-        </div>
-        <div className="relative flex flex-col w-full gap-4">
           <Button
             onClick={() => handleScreenViewClick(SCREEN.PREVIEW)}
             variant={
@@ -75,7 +79,10 @@ function App() {
           >
             Preview
           </Button>
-          {screenView.includes(SCREEN.PREVIEW) && <Preview data={data} />}
+        </div>
+        <div className="relative flex w-full gap-4">
+          {screenView.includes(SCREEN.EDITOR) && <MonacoEditor />}
+          {screenView.includes(SCREEN.PREVIEW) && <Preview />}
         </div>
       </div>
     </div>

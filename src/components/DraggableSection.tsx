@@ -17,6 +17,9 @@ import {
 } from "@dnd-kit/sortable";
 
 import { SortableItem } from "./SortableItem";
+import { useSectionsStore } from "../store/useSections";
+import placeholder from "../placeholders.json";
+import { toast } from "sonner";
 
 const measuringConfig = {
   droppable: {
@@ -25,7 +28,16 @@ const measuringConfig = {
 };
 
 export const DraggableSection = () => {
-  const [items, setItems] = useState(["1", "2", "3", "4", "5", "6", "7", "8"]);
+  const { sections, deleteSection, activeSection, setActiveSection } =
+    useSectionsStore();
+  const sectionsToArray = sections.map((section) => section.title);
+
+  const defaultSection = {
+    title: "",
+    content: "",
+  };
+
+  const [items, setItems] = useState(sectionsToArray);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -35,8 +47,30 @@ export const DraggableSection = () => {
       activationConstraint: "",
     })
   );
-  const handleRemove = (id: string) =>
+  const handleRemove = (id: string) => {
     setItems((items) => items.filter((item) => item !== id));
+
+    const sectionToDelete = placeholder.find((item) => item.title === id);
+    if (!sectionToDelete) return;
+    deleteSection(sectionToDelete);
+
+    const sectionsFiltered = sections.filter((section) => section.title !== id);
+
+    if (
+      sectionToDelete.title === activeSection.title &&
+      sectionToDelete.content === activeSection.content
+    ) {
+      if (sectionsFiltered.length > 0) {
+        setActiveSection(sectionsFiltered[0]);
+      } else {
+        setActiveSection(defaultSection);
+      }
+    }
+
+    console.log(activeSection);
+
+    toast(`${id} was deleted successfully!`);
+  };
 
   return (
     <DndContext

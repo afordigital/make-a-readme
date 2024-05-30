@@ -1,13 +1,16 @@
 import ReactMarkdown from "react-markdown";
+import { useSectionsStore } from "../store/useSections";
 
-type PreviewProps = {
-  data: string;
-};
+export const Preview = () => {
+  const { sections } = useSectionsStore();
 
-export const Preview = ({ data }: PreviewProps) => {
+  const aux = sections.map((section) => section.content);
+
   return (
-    <div className="">
-      <ReactMarkdown>{data}</ReactMarkdown>
+    <div className="w-[50%] flex flex-col gap-4">
+      {aux.map((item) => (
+        <ReactMarkdown>{item}</ReactMarkdown>
+      ))}
     </div>
   );
 };
