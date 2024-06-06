@@ -1,5 +1,6 @@
-import Editor from "@monaco-editor/react";
+import { Editor, type Monaco } from "@monaco-editor/react";
 import { useSectionsStore } from "../store/useSections";
+import OneDarkPro from "../theme/onedarkpro.json";
 
 export const MonacoEditor = () => {
   const { activeSection, updateSection, setActiveSection } = useSectionsStore();
@@ -14,16 +15,23 @@ export const MonacoEditor = () => {
     updateSection(newActiveSection);
   };
 
-  console.log(activeSection);
+  const handleEditorDidMount = (monaco: Monaco) => {
+    monaco.editor.defineTheme("OneDarkPro", {
+      base: "vs-dark",
+      inherit: true,
+      ...OneDarkPro,
+    });
+  };
 
   return (
     <div className="flex-1 overflow-hidden">
       <Editor
         height="90vh"
-        theme="vs-dark"
+        theme="OneDarkPro"
         defaultLanguage="markdown"
         defaultValue={activeSection.content}
         value={activeSection.content}
+        beforeMount={handleEditorDidMount}
         onChange={(value) => {
           if (!value) return;
           handleUpdateSection(value);
