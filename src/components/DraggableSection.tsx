@@ -8,6 +8,7 @@ import {
   useSensors,
   MeasuringStrategy,
   TouchSensor,
+  DragEndEvent,
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -43,9 +44,7 @@ export const DraggableSection = () => {
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates,
     }),
-    useSensor(TouchSensor, {
-      activationConstraint: "",
-    })
+    useSensor(TouchSensor)
   );
   const handleRemove = (id: string) => {
     setItems((items) => items.filter((item) => item !== id));
@@ -89,12 +88,14 @@ export const DraggableSection = () => {
     </DndContext>
   );
 
-  function handleDragEnd(event) {
+  function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
+    if (!over) return;
+
     if (active.id !== over.id) {
       setItems((items) => {
-        const oldIndex = items.indexOf(active.id);
-        const newIndex = items.indexOf(over.id);
+        const oldIndex = items.indexOf(active.id as string);
+        const newIndex = items.indexOf(over.id as string);
 
         return arrayMove(items, oldIndex, newIndex);
       });
