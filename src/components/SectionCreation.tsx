@@ -15,6 +15,7 @@ export const SectionCreation = () => {
       <div className="flex my-2 w-full items-center border-[1.5px] border-[#99ABE4] gap-4 rounded-md px-4">
         <Search className="text-[#99ABE4]" />
         <input
+          placeholder="Search for a section"
           className="bg-transparent focus:bg-transparent focus:outline-none py-5 h-full w-full"
           onChange={filterData}
         />

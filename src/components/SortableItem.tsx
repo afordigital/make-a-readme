@@ -2,8 +2,7 @@ import { Trash, RefreshCw } from "lucide-react";
 import { useSortable, defaultAnimateLayoutChanges } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { GripVerticalIcon } from "lucide-react";
-import { useSectionsStore } from "../store/useSections";
-import placeholder from "../placeholders.json";
+import { CSSProperties } from "react";
 
 // @ts-expect-error description
 const animateLayoutChanges = (args) =>
@@ -11,12 +10,18 @@ const animateLayoutChanges = (args) =>
 
 export function SortableItem({
   id,
+  title,
+  isSelected,
   onRemove,
+  onClick,
+
 }: {
   id: string;
+  title: string;
+  isSelected: boolean;
   onRemove: (id: string) => void;
+  onClick: (id: string) => void;
 }) {
-  const { setActiveSection } = useSectionsStore();
 
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({
@@ -45,28 +50,29 @@ export function SortableItem({
     transform: CSS.Translate.toString(transform),
     transition,
     height: `${height}px`,
-    cursor: "grab",
     userSelect: "none",
-  };
+  } as CSSProperties
 
-  const handleUpdateActiveSection = (id: string) => {
-    const sectionToUpdate = placeholder.find((item) => item.title === id);
-    if (!sectionToUpdate) return;
-    setActiveSection(sectionToUpdate);
-  };
 
   return (
     <div
       ref={setNodeRef}
-      className="flex my-4 w-full items-center border-2 border-[#99ABE4] justify-between rounded-md px-4 py-8 bg-[#617ACA]"
-      // @ts-expect-error description
       style={style}
-      onClick={() => handleUpdateActiveSection(id)}
-      {...attributes}
+      className=
+      {`flex my-4 w-full items-center border-2 ${isSelected? 'border-[#ffffff]' : 'border-[#99ABE4]'} justify-between rounded-md px-4 py-8 bg-[#617ACA] cursor-pointer`}
+      onClick={() => onClick(id)}
+     
     >
-      <div className="flex gap-4 cursor-pointer" {...listeners}>
+      <div className="flex gap-4" onClick={() => onClick(id)}>
+        <span
+          className="cursor-grab"
+         {...attributes}
+         {...listeners}
+        >
         <GripVerticalIcon></GripVerticalIcon>
-        <p>{id}</p>
+
+        </span>
+        <p>{title}</p>
       </div>
       <div className="flex gap-2">
         <button

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   DndContext,
   closestCenter,
@@ -19,7 +18,6 @@ import {
 
 import { SortableItem } from "./SortableItem";
 import { useSectionsStore } from "../store/useSections";
-import placeholder from "../placeholders.json";
 import { toast } from "sonner";
 
 const measuringConfig = {
@@ -29,17 +27,10 @@ const measuringConfig = {
 };
 
 export const DraggableSection = () => {
-  const { sections, deleteSection, activeSection, setActiveSection } =
+  const { sections, activeSection, setActiveSection, setSections } =
     useSectionsStore();
-  const sectionsToArray = sections.map((section) => section.id);
 
-  const defaultSection = {
-    id: crypto.randomUUID(),
-    title: "",
-    content: "",
-  };
 
-  const [items, setItems] = useState(sectionsToArray);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -47,29 +38,21 @@ export const DraggableSection = () => {
     }),
     useSensor(TouchSensor)
   );
+
+  const handleActiveSection = (id: string) => {
+    const sectionToUpdate = sections.find((item) => item.id === id);
+    if (!sectionToUpdate) return;
+    setActiveSection(sectionToUpdate);
+  }
+
   const handleRemove = (id: string) => {
-    setItems((items) => items.filter((item) => item !== id));
+    setSections(sections.filter((section) => section.id !== id));
 
-    const sectionToDelete = placeholder.find((item) => item.title === id);
-    if (!sectionToDelete) return;
-    deleteSection(sectionToDelete);
-
-    const sectionsFiltered = sections.filter((section) => section.title !== id);
-
-    if (
-      sectionToDelete.title === activeSection.title &&
-      sectionToDelete.content === activeSection.content
-    ) {
-      if (sectionsFiltered.length > 0) {
-        setActiveSection(sectionsFiltered[0]);
-      } else {
-        setActiveSection(defaultSection);
-      }
+    if (activeSection?.id === id) {
+      setActiveSection(null);
     }
-
-    console.log(activeSection);
-
-    toast(`${id} was deleted successfully!`);
+   
+    toast("Section was removed successfully!");
   };
 
   return (
@@ -79,10 +62,11 @@ export const DraggableSection = () => {
       onDragEnd={handleDragEnd}
       measuring={measuringConfig}
     >
-      <SortableContext items={items} strategy={verticalListSortingStrategy}>
+      <SortableContext items={sections} strategy={verticalListSortingStrategy}>
         <div className="bg-[#293357] p-4 h-screen overflow-auto">
-          {items.map((id) => (
-            <SortableItem onRemove={handleRemove} key={id} id={id} />
+          {sections.map((section) => (
+            <SortableItem onRemove={handleRemove} key={section.id} id={section.id} title={section.title} onClick={handleActiveSection} isSelected={activeSection?.id === section.id}
+            />
           ))}
         </div>
       </SortableContext>
@@ -94,12 +78,11 @@ export const DraggableSection = () => {
     if (!over) return;
 
     if (active.id !== over.id) {
-      setItems((items) => {
-        const oldIndex = items.indexOf(active.id as string);
-        const newIndex = items.indexOf(over.id as string);
+      const oldIndex = sections.findIndex((section) => section.id === active.id);
+      const newIndex = sections.findIndex((section) => section.id === over.id);
 
-        return arrayMove(items, oldIndex, newIndex);
-      });
+      setSections(arrayMove(sections, oldIndex, newIndex));
+
     }
   }
 };

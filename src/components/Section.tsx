@@ -13,8 +13,15 @@ export const Section = ({ title }: SectionProps) => {
   const handleAddSection = (titleToFind: string) => {
     const sectionToAdd = placeholder.find((item) => item.title === titleToFind);
     if (!sectionToAdd) return;
-    addSection(sectionToAdd);
-    setActiveSection(sectionToAdd);
+
+    const newSection = {
+      ...sectionToAdd,
+      sectionId: sectionToAdd.id,
+      id: crypto.randomUUID(),
+    }
+
+    addSection(newSection);
+    setActiveSection(newSection);
     toast(`${titleToFind} was added successfully!`);
   };
 

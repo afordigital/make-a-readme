@@ -6,9 +6,10 @@ export const MonacoEditor = () => {
   const { activeSection, updateSection, setActiveSection } = useSectionsStore();
 
   const handleUpdateSection = (value: string) => {
+    if (!activeSection) return;
+
     const newActiveSection = {
-      id: activeSection.id,
-      title: activeSection.title,
+      ...activeSection,
       content: value,
     };
 
@@ -30,8 +31,7 @@ export const MonacoEditor = () => {
         height="90vh"
         theme="OneDarkPro"
         defaultLanguage="markdown"
-        defaultValue={activeSection.content}
-        value={activeSection.content}
+        value={activeSection?.content ?? ''}
         beforeMount={handleEditorDidMount}
         onChange={(value) => {
           if (!value) return;

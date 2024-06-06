@@ -3,17 +3,18 @@ import { persist } from "zustand/middleware";
 
 export type SectionType = {
   id: string;
+  sectionId: string;
   title: string;
   content: string;
 };
 
 type SectionStore = {
   sections: SectionType[];
-  activeSection: SectionType;
-  setActiveSection: (sectionToUpdate: SectionType) => void;
+  activeSection: SectionType | null;
+  setActiveSection: (sectionToUpdate: SectionType | null) => void;
   addSection: (sectionToAdd: SectionType) => void;
   updateSection: (sectionToUpdate: SectionType) => void;
-  deleteSection: (sectionToDelete: SectionType) => void;
+  setSections: (sections: SectionType[]) => void;
 };
 
 export const useSectionsStore = create<SectionStore>()(
@@ -21,12 +22,7 @@ export const useSectionsStore = create<SectionStore>()(
     (set) => ({
       sections: [],
 
-      activeSection: {
-        id: crypto.randomUUID(),
-        title: "",
-        content: "",
-      },
-
+      activeSection: null,
       setActiveSection: (newActiveSection) =>
         set(() => ({
           activeSection: newActiveSection,
@@ -40,15 +36,12 @@ export const useSectionsStore = create<SectionStore>()(
       updateSection: (sectionToUpdate) =>
         set((prev) => ({
           sections: prev.sections.map((section) =>
-            section.title === sectionToUpdate.title ? sectionToUpdate : section
+            section.id === sectionToUpdate.id ? sectionToUpdate : section
           ),
         })),
-
-      deleteSection: (sectionToDelete) =>
-        set((prev) => ({
-          sections: prev.sections.filter(
-            (section) => section.title !== sectionToDelete.title
-          ),
+      setSections: (sections) =>
+        set(() => ({
+          sections,
         })),
     }),
     {
