@@ -16,7 +16,7 @@ export const Section = ({ title }: SectionProps) => {
 
     const newSection = {
       ...sectionToAdd,
-      sectionId: sectionToAdd.id,
+      placeholderId: sectionToAdd.id,
       id: crypto.randomUUID()
     }
 

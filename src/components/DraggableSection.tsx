@@ -19,6 +19,7 @@ import {
 import { SortableItem } from './SortableItem'
 import { useSectionsStore } from '../store/useSections'
 import { toast } from 'sonner'
+import placeholders from '../placeholders.json'
 
 const measuringConfig = {
   droppable: {
@@ -27,8 +28,13 @@ const measuringConfig = {
 }
 
 export const DraggableSection = () => {
-  const { sections, activeSection, setActiveSection, setSections } =
-    useSectionsStore()
+  const {
+    sections,
+    activeSection,
+    setActiveSection,
+    setSections,
+    updateSection
+  } = useSectionsStore()
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -44,6 +50,23 @@ export const DraggableSection = () => {
     setActiveSection(sectionToUpdate)
   }
 
+  const handleResetSection = (id: string, placeholderId: string) => {
+    console.log('reset section', id, placeholderId)
+    const placeholder = placeholders.find((item) => item.id === placeholderId)
+    if (!placeholder) return
+
+    const selectedSection = sections.find((item) => item.id === id)
+    if (!selectedSection) return
+
+    updateSection({
+      ...selectedSection,
+      title: placeholder.title,
+      content: placeholder.content
+    })
+
+    toast('Section was reset successfully!')
+  }
+
   const handleRemove = (id: string) => {
     setSections(sections.filter((section) => section.id !== id))
 
@@ -52,6 +75,21 @@ export const DraggableSection = () => {
     }
 
     toast('Section was removed successfully!')
+  }
+
+  const handleDragEnd = (event: DragEndEvent) => {
+    const { active, over } = event
+    if (!over) return
+
+    const activeSection = sections.find((section) => section.id === active.id)
+    if (activeSection) setActiveSection(activeSection)
+
+    if (active.id !== over.id) {
+      const oldIndex = sections.findIndex((section) => section.id === active.id)
+      const newIndex = sections.findIndex((section) => section.id === over.id)
+
+      setSections(arrayMove(sections, oldIndex, newIndex))
+    }
   }
 
   return (
@@ -65,10 +103,10 @@ export const DraggableSection = () => {
         <div className="bg-[#293357] p-4 h-screen overflow-auto">
           {sections.map((section) => (
             <SortableItem
-              onRemove={handleRemove}
               key={section.id}
-              id={section.id}
-              title={section.title}
+              section={section}
+              onRemove={handleRemove}
+              onReset={handleResetSection}
               onClick={handleActiveSection}
               isSelected={activeSection?.id === section.id}
             />
@@ -77,16 +115,4 @@ export const DraggableSection = () => {
       </SortableContext>
     </DndContext>
   )
-
-  function handleDragEnd(event: DragEndEvent) {
-    const { active, over } = event
-    if (!over) return
-
-    if (active.id !== over.id) {
-      const oldIndex = sections.findIndex((section) => section.id === active.id)
-      const newIndex = sections.findIndex((section) => section.id === over.id)
-
-      setSections(arrayMove(sections, oldIndex, newIndex))
-    }
-  }
 }

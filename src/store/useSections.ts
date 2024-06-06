@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware'
 
 export type SectionType = {
   id: string
-  sectionId: string
+  placeholderId: string
   title: string
   content: string
 }
@@ -21,7 +21,6 @@ export const useSectionsStore = create<SectionStore>()(
   persist(
     (set) => ({
       sections: [],
-
       activeSection: null,
       setActiveSection: (newActiveSection) =>
         set(() => ({
@@ -45,7 +44,7 @@ export const useSectionsStore = create<SectionStore>()(
         }))
     }),
     {
-      name: 'listed-storage'
+      name: 'section-storage'
     }
   )
 )
