@@ -31,9 +31,10 @@ const measuringConfig = {
 export const DraggableSection = () => {
   const { sections, deleteSection, activeSection, setActiveSection } =
     useSectionsStore();
-  const sectionsToArray = sections.map((section) => section.title);
+  const sectionsToArray = sections.map((section) => section.id);
 
   const defaultSection = {
+    id: crypto.randomUUID(),
     title: "",
     content: "",
   };

@@ -1,18 +1,19 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-export type Section = {
+export type SectionType = {
+  id: string;
   title: string;
   content: string;
 };
 
 type SectionStore = {
-  sections: Section[];
-  activeSection: Section;
-  setActiveSection: (sectionToUpdate: Section) => void;
-  addSection: (sectionToAdd: Section) => void;
-  updateSection: (sectionToUpdate: Section) => void;
-  deleteSection: (sectionToDelete: Section) => void;
+  sections: SectionType[];
+  activeSection: SectionType;
+  setActiveSection: (sectionToUpdate: SectionType) => void;
+  addSection: (sectionToAdd: SectionType) => void;
+  updateSection: (sectionToUpdate: SectionType) => void;
+  deleteSection: (sectionToDelete: SectionType) => void;
 };
 
 export const useSectionsStore = create<SectionStore>()(
@@ -21,6 +22,7 @@ export const useSectionsStore = create<SectionStore>()(
       sections: [],
 
       activeSection: {
+        id: crypto.randomUUID(),
         title: "",
         content: "",
       },
