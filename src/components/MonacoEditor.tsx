@@ -7,6 +7,7 @@ export const MonacoEditor = () => {
 
   const handleUpdateSection = (value: string) => {
     const newActiveSection = {
+      id: activeSection.id,
       title: activeSection.title,
       content: value,
     };
