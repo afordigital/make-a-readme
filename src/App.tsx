@@ -8,10 +8,13 @@ import { MODE, SCREEN, VARIANT } from "./components/constants";
 import placeholders from "./placeholders.json";
 import { Section } from "./components/Section";
 import { Toaster } from "sonner";
+import Split from 'react-split'
 
 function App() {
   const [mode, setMode] = useState(MODE.DRAFT);
   const [screenView, setScreenView] = useState([SCREEN.EDITOR, SCREEN.PREVIEW]);
+
+  const showBothScreens = screenView.includes(SCREEN.EDITOR) && screenView.includes(SCREEN.PREVIEW) 
 
   const handleScreenViewClick = (view: SCREEN) => {
     if (screenView.length === 1 && screenView[0] === view) {
@@ -25,11 +28,13 @@ function App() {
     }
   };
 
+  
+
   return (
-    <div className="w-screen h-screen overflow-hidden flex text-white items-center bg-[#293456]">
+    <div className="w-screen h-screen overflow-hidden grid grid-cols-8 text-white items-center bg-[#293456]">
       <Toaster />
 
-      <div className="min-w-[400px] bg-[#293357] relative flex flex-col gap-4 h-full p-4">
+      <div className="min-w-[400px] bg-[#293357] relative flex flex-col gap-4 h-full p-4 col-span-2">
         <div className="w-full flex gap-x-8">
           <Button
             variant={mode === MODE.DRAFT ? VARIANT.PRIMARY : VARIANT.SECONDARY}
@@ -59,7 +64,7 @@ function App() {
         )}
       </div>
 
-      <div className="flex flex-col gap-8 w-full px-20 h-full p-4">
+      <div className="flex flex-col gap-8 w-full pr-10 h-full p-4 col-span-6">
         <div className="relative w-full flex gap-4">
           <Button
             onClick={() => handleScreenViewClick(SCREEN.EDITOR)}
@@ -82,9 +87,19 @@ function App() {
             Preview
           </Button>
         </div>
-        <div className="relative flex w-full gap-4">
-          {screenView.includes(SCREEN.EDITOR) && <MonacoEditor />}
-          {screenView.includes(SCREEN.PREVIEW) && <Preview />}
+        <div className="w-full relative h-full">
+
+        {showBothScreens ?  <Split
+            className="split"
+          >
+            <MonacoEditor />
+            <Preview />
+          </Split>: (
+            <>
+              {screenView.includes(SCREEN.EDITOR) && <MonacoEditor />}
+              {screenView.includes(SCREEN.PREVIEW) && <Preview />}
+            </>
+          )}
         </div>
       </div>
     </div>
