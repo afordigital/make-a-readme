@@ -7,53 +7,52 @@ import {
   useSensors,
   MeasuringStrategy,
   TouchSensor,
-  DragEndEvent,
-} from "@dnd-kit/core";
+  DragEndEvent
+} from '@dnd-kit/core'
 import {
   arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
+  verticalListSortingStrategy
+} from '@dnd-kit/sortable'
 
-import { SortableItem } from "./SortableItem";
-import { useSectionsStore } from "../store/useSections";
-import { toast } from "sonner";
+import { SortableItem } from './SortableItem'
+import { useSectionsStore } from '../store/useSections'
+import { toast } from 'sonner'
 
 const measuringConfig = {
   droppable: {
-    strategy: MeasuringStrategy.Always,
-  },
-};
+    strategy: MeasuringStrategy.Always
+  }
+}
 
 export const DraggableSection = () => {
   const { sections, activeSection, setActiveSection, setSections } =
-    useSectionsStore();
-
+    useSectionsStore()
 
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
+      coordinateGetter: sortableKeyboardCoordinates
     }),
     useSensor(TouchSensor)
-  );
+  )
 
   const handleActiveSection = (id: string) => {
-    const sectionToUpdate = sections.find((item) => item.id === id);
-    if (!sectionToUpdate) return;
-    setActiveSection(sectionToUpdate);
+    const sectionToUpdate = sections.find((item) => item.id === id)
+    if (!sectionToUpdate) return
+    setActiveSection(sectionToUpdate)
   }
 
   const handleRemove = (id: string) => {
-    setSections(sections.filter((section) => section.id !== id));
+    setSections(sections.filter((section) => section.id !== id))
 
     if (activeSection?.id === id) {
-      setActiveSection(null);
+      setActiveSection(null)
     }
-   
-    toast("Section was removed successfully!");
-  };
+
+    toast('Section was removed successfully!')
+  }
 
   return (
     <DndContext
@@ -65,24 +64,29 @@ export const DraggableSection = () => {
       <SortableContext items={sections} strategy={verticalListSortingStrategy}>
         <div className="bg-[#293357] p-4 h-screen overflow-auto">
           {sections.map((section) => (
-            <SortableItem onRemove={handleRemove} key={section.id} id={section.id} title={section.title} onClick={handleActiveSection} isSelected={activeSection?.id === section.id}
+            <SortableItem
+              onRemove={handleRemove}
+              key={section.id}
+              id={section.id}
+              title={section.title}
+              onClick={handleActiveSection}
+              isSelected={activeSection?.id === section.id}
             />
           ))}
         </div>
       </SortableContext>
     </DndContext>
-  );
+  )
 
   function handleDragEnd(event: DragEndEvent) {
-    const { active, over } = event;
-    if (!over) return;
+    const { active, over } = event
+    if (!over) return
 
     if (active.id !== over.id) {
-      const oldIndex = sections.findIndex((section) => section.id === active.id);
-      const newIndex = sections.findIndex((section) => section.id === over.id);
+      const oldIndex = sections.findIndex((section) => section.id === active.id)
+      const newIndex = sections.findIndex((section) => section.id === over.id)
 
-      setSections(arrayMove(sections, oldIndex, newIndex));
-
+      setSections(arrayMove(sections, oldIndex, newIndex))
     }
   }
-};
+}

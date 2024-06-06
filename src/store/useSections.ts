@@ -1,21 +1,21 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 export type SectionType = {
-  id: string;
-  sectionId: string;
-  title: string;
-  content: string;
-};
+  id: string
+  sectionId: string
+  title: string
+  content: string
+}
 
 type SectionStore = {
-  sections: SectionType[];
-  activeSection: SectionType | null;
-  setActiveSection: (sectionToUpdate: SectionType | null) => void;
-  addSection: (sectionToAdd: SectionType) => void;
-  updateSection: (sectionToUpdate: SectionType) => void;
-  setSections: (sections: SectionType[]) => void;
-};
+  sections: SectionType[]
+  activeSection: SectionType | null
+  setActiveSection: (sectionToUpdate: SectionType | null) => void
+  addSection: (sectionToAdd: SectionType) => void
+  updateSection: (sectionToUpdate: SectionType) => void
+  setSections: (sections: SectionType[]) => void
+}
 
 export const useSectionsStore = create<SectionStore>()(
   persist(
@@ -25,27 +25,27 @@ export const useSectionsStore = create<SectionStore>()(
       activeSection: null,
       setActiveSection: (newActiveSection) =>
         set(() => ({
-          activeSection: newActiveSection,
+          activeSection: newActiveSection
         })),
 
       addSection: (sectionToAdd) =>
         set((prev) => ({
-          sections: [...prev.sections, sectionToAdd],
+          sections: [...prev.sections, sectionToAdd]
         })),
 
       updateSection: (sectionToUpdate) =>
         set((prev) => ({
           sections: prev.sections.map((section) =>
             section.id === sectionToUpdate.id ? sectionToUpdate : section
-          ),
+          )
         })),
       setSections: (sections) =>
         set(() => ({
-          sections,
-        })),
+          sections
+        }))
     }),
     {
-      name: "listed-storage",
+      name: 'listed-storage'
     }
   )
-);
+)

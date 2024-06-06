@@ -1,14 +1,14 @@
-import { Section } from "./Section";
-import placeholders from "../placeholders.json";
-import { Search } from "lucide-react";
-import { useState } from "react";
+import { Section } from './Section'
+import placeholders from '../placeholders.json'
+import { Search } from 'lucide-react'
+import { useState } from 'react'
 
 export const SectionCreation = () => {
-  const [filteredData, setFilteredData] = useState("");
+  const [filteredData, setFilteredData] = useState('')
 
   const filterData = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFilteredData(event.target.value);
-  };
+    setFilteredData(event.target.value)
+  }
 
   return (
     <>
@@ -31,8 +31,8 @@ export const SectionCreation = () => {
             +!!a.title.toUpperCase().startsWith(filteredData.toUpperCase())
         )
         .map((section) => {
-          return <Section key={section.title} title={section.title} />;
+          return <Section key={section.title} title={section.title} />
         })}
     </>
-  );
-};
+  )
+}
