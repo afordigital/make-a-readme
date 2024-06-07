@@ -5,16 +5,14 @@ import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
 import SyntaxHighlighter from 'react-syntax-highlighter'
 import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
-import { CSSProperties } from 'react'
 
-type HighlighterStyle = { [key: string]: CSSProperties }
 export const Preview = () => {
   const { sections } = useSectionsStore()
 
   const markdown = sections.map((section) => section.content).join('\n')
 
   return (
-    <div className="pl-4 h-[calc(100vh_-_7rem)] overflow-auto">
+    <div className="pl-4 h-[calc(100vh_-_10.9rem)] overflow-auto">
       <ReactMarkdown
         className={'markdown'}
         remarkPlugins={[remarkGfm]}
