@@ -31,8 +31,9 @@ function App() {
     <>
       <Toaster />
       <div className="w-screen h-screen overflow-hidden grid grid-cols-8 text-white items-center bg-[#293456]">
-        <div className="min-w-[400px] bg-[#293357] relative flex flex-col gap-4 h-full p-4 col-span-2 overflow-auto">
-          <div className="w-full flex gap-x-8">
+        <div className="col-span-8 h-[60px] border-b border-[rgb(153,171,228,0.5)] bg-[#293357]"></div>
+        <div className="min-w-[400px] bg-[rgb(41,51,87,0.5)] relative flex flex-col gap-4 h-full p-4 col-span-2 overflow-auto">
+          <div className="w-full flex gap-x-4 px-4">
             <Button
               variant={
                 mode === MODE.DRAFT ? VARIANT.PRIMARY : VARIANT.SECONDARY
@@ -57,7 +58,7 @@ function App() {
           {mode === MODE.DRAFT ? (
             <DraggableSection />
           ) : (
-            <div className="flex flex-col p-4 overflow-auto">
+            <div className="flex flex-col mt-5 px-4 pb-4 flex-1 scroll-container">
               <SectionCreation />
             </div>
           )}

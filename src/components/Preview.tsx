@@ -1,10 +1,13 @@
 import ReactMarkdown from 'react-markdown'
+import type { ExtraProps } from 'react-markdown'
 import { useSectionsStore } from '../store/useSections'
 import remarkGfm from 'remark-gfm'
 import rehypeRaw from 'rehype-raw'
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { dracula } from 'react-syntax-highlighter/dist/cjs/styles/prism'
+import SyntaxHighlighter from 'react-syntax-highlighter'
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { CSSProperties } from 'react'
 
+type HighlighterStyle = { [key: string]: CSSProperties }
 export const Preview = () => {
   const { sections } = useSectionsStore()
 
@@ -19,14 +22,12 @@ export const Preview = () => {
         components={{
           code({ className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || '')
-
             return match ? (
               <SyntaxHighlighter
-                // @ts-expect-error - I don't know how to fix this
-                style={dracula}
                 PreTag="div"
                 language={match[1]}
-                {...props}
+                {...(props as ExtraProps)}
+                style={dracula}
               >
                 {String(children).replace(/\n$/, '')}
               </SyntaxHighlighter>
