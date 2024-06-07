@@ -38,7 +38,7 @@ export const SectionCreation = () => {
         />
         <Search className="text-[#99ABE4]" />
       </div>
-      <ul className="flex flex-col gap-y-1 w-full flex-1" ref={parent}>
+      <ul className="flex flex-col gap-y-1 w-full flex-1 overflow-auto pr-1" ref={parent}>
         {filteredData.map((section) => {
           return <Section key={section.title} title={section.title} />;
         })}
