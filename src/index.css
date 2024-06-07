@@ -39,6 +39,10 @@ body ::-webkit-scrollbar-thumb {
   }
 }
 
+.markdown > * {
+  all: revert;
+}
+
 .split {
   display: flex;
   flex-direction: row;
