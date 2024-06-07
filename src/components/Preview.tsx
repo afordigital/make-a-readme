@@ -34,6 +34,10 @@ export const Preview = () => {
                 {children}
               </code>
             )
+          },
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          a({ node, ...props }) {
+            return <a target="_blank" {...props} />
           }
         }}
       >
