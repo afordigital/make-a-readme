@@ -30,8 +30,8 @@ function App() {
   return (
     <>
       <Toaster />
-      <div className="w-screen h-screen overflow-hidden grid grid-cols-8 text-white items-center bg-[#293456]">
-        <div className="min-w-[400px] bg-[#293357] relative flex flex-col gap-4 h-full p-4 col-span-2 overflow-auto">
+      <div className="w-screen h-screen grid grid-cols-8 text-white items-center bg-[#293456]">
+        <div className=" bg-[#293357] relative flex flex-col gap-4 h-full p-4 col-span-2 overflow-auto">
           <div className="w-full flex gap-x-8">
             <Button
               variant={
@@ -63,7 +63,7 @@ function App() {
           )}
         </div>
 
-        <div className="flex flex-col gap-8 w-auto pr-10 h-full p-4 col-span-6">
+        <div className="flex flex-col gap-8 w-auto pr-10 h-full p-4 col-span-6 ">
           <div className="relative w-full flex gap-4">
             <Button
               onClick={() => handleScreenViewClick(SCREEN.EDITOR)}
@@ -86,9 +86,9 @@ function App() {
               Preview
             </Button>
           </div>
-          <div className="w-full relative h-full">
+          <div className="w-full flex-1">
             {showBothScreens ? (
-              <Split className="split">
+              <Split className="split ">
                 <MonacoEditor />
                 <Preview />
               </Split>
