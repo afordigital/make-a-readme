@@ -1,13 +1,13 @@
-import { VARIANT } from "../constants";
+import { VARIANT } from '../constants'
 
 type ButtonProps = {
-  variant: VARIANT.PRIMARY | VARIANT.SECONDARY;
-  children: React.ReactNode;
-  onClick: () => void;
-};
+  variant: VARIANT.PRIMARY | VARIANT.SECONDARY
+  children: React.ReactNode
+  onClick: () => void
+}
 
-const PRIMARY_STYLE = "bg-[#617ACA] hover:bg-[#435db5]";
-const SECONDARY_STYLE = "border-[1px] border-[#617ACA] hover:bg-[#6179ca31]";
+const PRIMARY_STYLE = 'bg-[#617ACA] hover:bg-[#435db5]'
+const SECONDARY_STYLE = 'border-[1px] border-[#617ACA] hover:bg-[#6179ca31]'
 
 export const Button = ({ variant, children, onClick }: ButtonProps) => {
   return (
@@ -19,5 +19,5 @@ export const Button = ({ variant, children, onClick }: ButtonProps) => {
     >
       {children}
     </button>
-  );
-};
+  )
+}

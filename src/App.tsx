@@ -1,31 +1,31 @@
-import { useState } from "react";
-import { Toaster } from "sonner";
-import { DraggableSection } from "./components/DraggableSection";
-import { MonacoEditor } from "./components/MonacoEditor";
-import { Preview } from "./components/Preview";
-import { Button } from "./components/common/Button";
-import { MODE, SCREEN, VARIANT } from "./components/constants";
-import { SectionCreation } from "./components/SectionCreation";
-import Split from "react-split";
+import { useState } from 'react'
+import { Toaster } from 'sonner'
+import { DraggableSection } from './components/DraggableSection'
+import { MonacoEditor } from './components/MonacoEditor'
+import { Preview } from './components/Preview'
+import { Button } from './components/common/Button'
+import { MODE, SCREEN, VARIANT } from './components/constants'
+import { SectionCreation } from './components/SectionCreation'
+import Split from 'react-split'
 
 function App() {
-  const [mode, setMode] = useState(MODE.DRAFT);
-  const [screenView, setScreenView] = useState([SCREEN.EDITOR, SCREEN.PREVIEW]);
+  const [mode, setMode] = useState(MODE.DRAFT)
+  const [screenView, setScreenView] = useState([SCREEN.EDITOR, SCREEN.PREVIEW])
 
   const showBothScreens =
-    screenView.includes(SCREEN.EDITOR) && screenView.includes(SCREEN.PREVIEW);
+    screenView.includes(SCREEN.EDITOR) && screenView.includes(SCREEN.PREVIEW)
 
   const handleScreenViewClick = (view: SCREEN) => {
     if (screenView.length === 1 && screenView[0] === view) {
-      return;
+      return
     }
 
     if (screenView.includes(view)) {
-      setScreenView(screenView.filter((screen) => screen !== view));
+      setScreenView(screenView.filter((screen) => screen !== view))
     } else {
-      setScreenView([...screenView, view]);
+      setScreenView([...screenView, view])
     }
-  };
+  }
 
   return (
     <>
@@ -38,7 +38,7 @@ function App() {
                 mode === MODE.DRAFT ? VARIANT.PRIMARY : VARIANT.SECONDARY
               }
               onClick={() => {
-                setMode(MODE.DRAFT);
+                setMode(MODE.DRAFT)
               }}
             >
               Draft
@@ -48,7 +48,7 @@ function App() {
                 mode === MODE.DRAFT ? VARIANT.SECONDARY : VARIANT.PRIMARY
               }
               onClick={() => {
-                setMode(MODE.ADD_SECTION);
+                setMode(MODE.ADD_SECTION)
               }}
             >
               Add Section
@@ -102,7 +102,7 @@ function App() {
         </div>
       </div>
     </>
-  );
+  )
 }
 
-export default App;
+export default App

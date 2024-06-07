@@ -13,7 +13,7 @@ html {
 }
 
 body {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   --sb-track-color: #394571;
   --sb-thumb-color: #617aca;
   --sb-size: 14px;
@@ -37,6 +37,10 @@ body ::-webkit-scrollbar-thumb {
   body {
     scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
   }
+}
+
+.markdown > * {
+  all: revert;
 }
 
 .split {

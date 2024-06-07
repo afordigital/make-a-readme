@@ -1,33 +1,40 @@
-import { CirclePlus } from "lucide-react";
-import { toast } from "sonner";
-import { useSectionsStore } from "../store/useSections";
-import placeholder from "../placeholders.json";
+import { CirclePlus } from 'lucide-react'
+import { toast } from 'sonner'
+import { useSectionsStore } from '../store/useSections'
+import placeholder from '../placeholders.json'
 
 type SectionProps = {
-  title: string;
-};
+  title: string
+}
 
 export const Section = ({ title }: SectionProps) => {
-  const { addSection, setActiveSection } = useSectionsStore();
+  const { addSection, setActiveSection } = useSectionsStore()
 
   const handleAddSection = (titleToFind: string) => {
-    const sectionToAdd = placeholder.find((item) => item.title === titleToFind);
-    if (!sectionToAdd) return;
-    addSection(sectionToAdd);
-    setActiveSection(sectionToAdd);
-    toast(`${titleToFind} was added successfully!`);
-  };
+    const sectionToAdd = placeholder.find((item) => item.title === titleToFind)
+    if (!sectionToAdd) return
+
+    const newSection = {
+      ...sectionToAdd,
+      placeholderId: sectionToAdd.id,
+      id: crypto.randomUUID()
+    }
+
+    addSection(newSection)
+    setActiveSection(newSection)
+    toast(`${titleToFind} was added successfully!`)
+  }
 
   return (
     <div className="flex py-5 my-2 w-full items-center border-2 border-[#99ABE4] gap-4 rounded-md px-4 bg-[#617ACA]">
       <button
         onClick={() => {
-          handleAddSection(title);
+          handleAddSection(title)
         }}
       >
         <CirclePlus />
       </button>
       <p className="font-bold">{title}</p>
     </div>
-  );
-};
+  )
+}
