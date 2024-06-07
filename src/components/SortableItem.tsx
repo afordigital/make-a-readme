@@ -39,7 +39,9 @@ export function SortableItem({
     <div
       ref={setNodeRef}
       style={style}
-      className={`flex my-4 w-full items-center border-2 ${isSelected ? 'border-[#ffffff]' : 'border-[#99ABE4]'} justify-between rounded-md px-4 py-8 bg-[#617ACA] cursor-pointer`}
+      className={`flex my-4 w-full items-center border-2 ${
+        isSelected ? 'border-[#ffffff]' : 'border-[#99ABE4]'
+      } justify-between rounded-md px-4 py-8 bg-[#617ACA] cursor-pointer`}
       onClick={() => onClick(section.id)}
     >
       <div className="flex gap-4" onClick={() => onClick(section.id)}>
@@ -52,7 +54,7 @@ export function SortableItem({
         <button
           onClick={(event) => {
             event.stopPropagation()
-            onReset(section.id, section.placeholderId)
+            onReset(section.id, section?.placeholderId ?? '')
           }}
           className="hover:bg-[#293357] flex items-center justify-center rounded-full p-1 size-[32px]"
         >
