@@ -28,7 +28,7 @@ export const MonacoEditor = () => {
   return (
     <div className="flex-1 overflow-hidden">
       <Editor
-        height="90vh"
+        height={'100%'}
         theme="OneDarkPro"
         defaultLanguage="markdown"
         value={activeSection?.content ?? ''}
