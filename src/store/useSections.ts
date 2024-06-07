@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware'
 
 export type SectionType = {
   id: string
-  placeholderId: string
+  placeholderId?: string
   title: string
   content: string
 }

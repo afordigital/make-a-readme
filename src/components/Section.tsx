@@ -26,15 +26,15 @@ export const Section = ({ title }: SectionProps) => {
   }
 
   return (
-    <div className="flex py-5 my-2 w-full items-center border-2 border-[#99ABE4] gap-4 rounded-md px-4 bg-[#617ACA]">
+    <div className="flex p-3 my-2 w-full justify-between items-center border-2 border-[#99ABE4] gap-4 rounded-md bg-[#617ACA]">
+      <p className="font-bold">{title}</p>
       <button
         onClick={() => {
           handleAddSection(title)
         }}
       >
-        <CirclePlus />
+        <CirclePlus className="self-end" />
       </button>
-      <p className="font-bold">{title}</p>
     </div>
   )
 }
