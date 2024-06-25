@@ -12,7 +12,7 @@ export const Preview = () => {
   const markdown = sections.map((section) => section.content).join('\n')
 
   return (
-    <div className="pl-4 h-[calc(100vh_-_10.9rem)] overflow-auto">
+    <div className="pl-4 h-[calc(100vh_-_10.9rem)] overflow-auto pr-1">
       <ReactMarkdown
         className={'markdown'}
         remarkPlugins={[remarkGfm]}
@@ -34,6 +34,10 @@ export const Preview = () => {
                 {children}
               </code>
             )
+          },
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          a({ node, ...props }) {
+            return <a target="_blank" {...props} />
           }
         }}
       >

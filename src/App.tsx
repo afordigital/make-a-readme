@@ -87,9 +87,9 @@ function App() {
               Preview
             </Button>
           </div>
-          <div className="w-full flex-1">
+          <div className="w-full flex-1 flex">
             {showBothScreens ? (
-              <Split className="split ">
+              <Split className="split h-full flex-1">
                 <MonacoEditor />
                 <Preview />
               </Split>
