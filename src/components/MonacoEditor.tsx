@@ -26,7 +26,7 @@ export const MonacoEditor = () => {
   }
 
   return (
-    <div className="flex-1 overflow-hidden">
+    <div className="w-full overflow-auto">
       <Editor
         height={'100%'}
         theme="OneDarkPro"

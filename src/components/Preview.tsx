@@ -12,7 +12,7 @@ export const Preview = () => {
   const markdown = sections.map((section) => section.content).join('\n')
 
   return (
-    <div className="pl-4 h-[calc(100vh_-_10.9rem)] overflow-auto pr-1">
+    <div className="w-full pl-4 pr-1 overflow-auto">
       <ReactMarkdown
         className={'markdown'}
         remarkPlugins={[remarkGfm]}

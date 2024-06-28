@@ -31,7 +31,7 @@ export function SortableItem({
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
-    height: `20px`,
+    height: `auto`,
     userSelect: 'none'
   } as CSSProperties
 
@@ -39,12 +39,12 @@ export function SortableItem({
     <div
       ref={setNodeRef}
       style={style}
-      className={`flex my-4 w-full items-center border-2 ${
+      className={`w-full h-full flex flex-col lg:flex-row items-center gap-2 my-4 border-2 ${
         isSelected ? 'border-[#ffffff]' : 'border-[#99ABE4]'
-      } justify-between rounded-md px-4 py-8 bg-[#617ACA] cursor-pointer`}
+      } justify-between rounded-md p-4 bg-[#617ACA] cursor-pointer`}
       onClick={() => onClick(section.id)}
     >
-      <div className="flex gap-4" onClick={() => onClick(section.id)}>
+      <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4" onClick={() => onClick(section.id)}>
         <span className="cursor-grab" {...attributes} {...listeners}>
           <GripVerticalIcon></GripVerticalIcon>
         </span>
