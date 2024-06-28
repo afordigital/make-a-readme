@@ -29,7 +29,7 @@ export const SectionCreation = () => {
     []
   );
   return (
-    <>
+    <div className="flex flex-col mt-5 sm:px-2 lg:px-4 pb-4 flex-1 scroll-container">
       <div className="flex mb-2 w-full items-center border-[1.5px] border-[#99ABE4] gap-4 rounded-md px-4">
         <input
           className="bg-transparent focus:bg-transparent focus:outline-none py-5 h-full w-full"
@@ -38,11 +38,11 @@ export const SectionCreation = () => {
         />
         <Search className="text-[#99ABE4]" />
       </div>
-      <ul className="flex flex-col gap-y-1 w-full flex-1 overflow-auto pr-1" ref={parent}>
+      <ul className="flex flex-col gap-y-1 w-full flex-1 overflow-auto" ref={parent}>
         {filteredData.map((section) => {
           return <Section key={section.title} title={section.title} />;
         })}
       </ul>
-    </>
+    </div>
   )
 }

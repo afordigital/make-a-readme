@@ -100,7 +100,7 @@ export const DraggableSection = () => {
       measuring={measuringConfig}
     >
       <SortableContext items={sections} strategy={verticalListSortingStrategy}>
-        <div className="bg-[#293357] p-4 h-screen overflow-auto">
+        <div className="h-full bg-[#293357] sm:p-4 overflow-auto">
           {sections.map((section) => (
             <SortableItem
               key={section.id}
