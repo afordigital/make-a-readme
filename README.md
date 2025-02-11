@@ -4,7 +4,7 @@ Create beautiful documentation
 
 # Figma
 
-![figma](<https://www.figma.com/design/qmss3J3uMoS3mI0H9MA5n9/Comuafor-1-(Copy)?node-id=4527-354&t=UOOCWM5vUZs0MFbb-1>)
+![figma](<https://www.figma.com/design/qmss3J3uMoS3mI0H9MA5n9/Comuafor-1-(Copy)?node-id=4527-354&t=UOOCWM5vUZs0MFbb-1>)(https://www.figma.com/)
 
 ## 🚀 Getting Started
 
