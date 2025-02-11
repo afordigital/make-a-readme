@@ -1,7 +1,8 @@
-import { CirclePlus } from 'lucide-react'
-import { toast } from 'sonner'
 import { useSectionsStore } from '../store/useSections'
+import { toast } from '@pheralb/toast'
 import placeholder from '../placeholders.json'
+import { Box, Button, Flex, Text } from '@radix-ui/themes'
+import { PlusCircledIcon } from '@radix-ui/react-icons'
 
 type SectionProps = {
   title: string
@@ -22,19 +23,31 @@ export const Section = ({ title }: SectionProps) => {
 
     addSection(newSection)
     setActiveSection(newSection)
-    toast(`${titleToFind} was added successfully!`)
+    toast.success({
+      text: `✨ ${titleToFind} was added successfully!`
+    })
   }
 
   return (
-    <div className="flex p-3 my-2 w-full justify-between items-center border-2 border-[#99ABE4] gap-4 rounded-md bg-[#617ACA]">
-      <p className="font-bold">{title}</p>
-      <button
-        onClick={() => {
-          handleAddSection(title)
-        }}
-      >
-        <CirclePlus className="self-end" />
-      </button>
-    </div>
+    <Box
+      p="4"
+      style={{
+        backgroundColor: 'var(--gray-a2)',
+        borderRadius: 'var(--radius-3)'
+      }}
+    >
+      <Flex gap="3" align="center" justify={'between'}>
+        <Text weight="medium">{title}</Text>
+        <Button
+          onClick={() => {
+            handleAddSection(title)
+          }}
+          variant="ghost"
+          className="cursor-pointer"
+        >
+          <PlusCircledIcon />
+        </Button>
+      </Flex>
+    </Box>
   )
 }

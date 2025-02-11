@@ -1,4 +1,4 @@
-import { Trash, RefreshCw } from 'lucide-react'
+import { X, RotateCcw } from 'lucide-react'
 import { useSortable, defaultAnimateLayoutChanges } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { GripVerticalIcon } from 'lucide-react'
@@ -31,22 +31,24 @@ export function SortableItem({
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
-    height: `20px`,
     userSelect: 'none'
   } as CSSProperties
 
   return (
-    <div
+    <li
       ref={setNodeRef}
       style={style}
-      className={`flex my-4 w-full items-center border-2 ${
-        isSelected ? 'border-[#ffffff]' : 'border-[#99ABE4]'
-      } justify-between rounded-md px-4 py-8 bg-[#617ACA] cursor-pointer`}
+      className={`flex w-full group items-center h-[48px] border-2 ${
+        isSelected ? '' : ''
+      } justify-between rounded-md p-3 cursor-pointer`}
       onClick={() => onClick(section.id)}
     >
-      <div className="flex gap-4" onClick={() => onClick(section.id)}>
+      <div
+        className="flex gap-2 items-center"
+        onClick={() => onClick(section.id)}
+      >
         <span className="cursor-grab" {...attributes} {...listeners}>
-          <GripVerticalIcon></GripVerticalIcon>
+          <GripVerticalIcon strokeWidth={2} size={16} />
         </span>
         <p>{section.title}</p>
       </div>
@@ -54,22 +56,22 @@ export function SortableItem({
         <button
           onClick={(event) => {
             event.stopPropagation()
-            onReset(section.id, section?.placeholderId ?? '')
+            onRemove(section.id)
           }}
-          className="hover:bg-[#293357] flex items-center justify-center rounded-full p-1 size-[32px]"
+          className="group-hover:flex hidden hover:bg-red-100 items-center justify-center rounded-[4px] p-1 size-[32px]"
         >
-          <RefreshCw size={16} />
+          <X size={16} color="#C72527" />
         </button>
         <button
           onClick={(event) => {
             event.stopPropagation()
-            onRemove(section.id)
+            onReset(section.id, section?.placeholderId ?? '')
           }}
-          className="hover:bg-[#293357] flex items-center justify-center rounded-full p-1 size-[32px]"
+          className="group-hover:flex hidden hover:bg-slate-200 items-center justify-center rounded-[4px] p-1 size-[32px]"
         >
-          <Trash size={16} />
+          <RotateCcw size={16} />
         </button>
       </div>
-    </div>
+    </li>
   )
 }

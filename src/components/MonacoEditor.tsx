@@ -30,6 +30,7 @@ export const MonacoEditor = () => {
       <Editor
         height={'100%'}
         theme="OneDarkPro"
+        options={{ minimap: { enabled: false } }}
         defaultLanguage="markdown"
         value={activeSection?.content ?? ''}
         beforeMount={handleEditorDidMount}

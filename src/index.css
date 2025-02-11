@@ -14,8 +14,8 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
-  --sb-track-color: #394571;
-  --sb-thumb-color: #617aca;
+  --sb-track-color: #121314;
+  --sb-thumb-color: #1f2123;
   --sb-size: 14px;
 }
 
@@ -55,7 +55,7 @@ body ::-webkit-scrollbar-thumb {
 }
 
 .gutter.gutter-horizontal {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==");
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
   cursor: col-resize;
 }
 

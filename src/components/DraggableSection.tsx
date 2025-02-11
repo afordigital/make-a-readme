@@ -18,7 +18,7 @@ import {
 
 import { SortableItem } from './SortableItem'
 import { useSectionsStore } from '../store/useSections'
-import { toast } from 'sonner'
+import { toast } from '@pheralb/toast'
 import placeholders from '../placeholders.json'
 
 const measuringConfig = {
@@ -64,7 +64,9 @@ export const DraggableSection = () => {
       content: placeholder.content
     })
 
-    toast('Section was reset successfully!')
+    toast.success({
+      text: '✨ Section was reset successfully!'
+    })
   }
 
   const handleRemove = (id: string) => {
@@ -74,7 +76,9 @@ export const DraggableSection = () => {
       setActiveSection(null)
     }
 
-    toast('Section was removed successfully!')
+    toast.success({
+      text: '✨ Section was removed successfully!'
+    })
   }
 
   const handleDragEnd = (event: DragEndEvent) => {
@@ -100,7 +104,8 @@ export const DraggableSection = () => {
       measuring={measuringConfig}
     >
       <SortableContext items={sections} strategy={verticalListSortingStrategy}>
-        <div className="bg-[#293357] p-4 h-screen overflow-auto">
+        <h2 className="font-medium text-slate-500">Current Sections</h2>
+        <ul className="overflow-hidden font-medium flex flex-col gap-[6px]">
           {sections.map((section) => (
             <SortableItem
               key={section.id}
@@ -111,7 +116,7 @@ export const DraggableSection = () => {
               isSelected={activeSection?.id === section.id}
             />
           ))}
-        </div>
+        </ul>
       </SortableContext>
     </DndContext>
   )

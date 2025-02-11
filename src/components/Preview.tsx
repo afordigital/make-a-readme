@@ -11,10 +11,13 @@ export const Preview = () => {
 
   const markdown = sections.map((section) => section.content).join('\n')
 
+  // TODO: Change this markdown as an output to copy code
+  // Investigate onClick={() => {navigator.clipboard.writeText(this.state.textToCopy)}}
+
   return (
     <div className="pl-4 h-[calc(100vh_-_10.9rem)] overflow-auto pr-1">
       <ReactMarkdown
-        className={'markdown'}
+        className="markdown"
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]}
         components={{
