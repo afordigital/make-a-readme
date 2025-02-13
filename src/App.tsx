@@ -13,7 +13,7 @@ function App() {
       <Toaster theme="light" />
       <Box className="bg-[#FAFAFA] text-slate-900">
         <Header />
-        <div className="w-screen h-screen overflow-hidden grid grid-cols-8 items-center">
+        <div className="grid grid-cols-[438px_2fr] gap-x-6">
           <div className="relative flex flex-col gap-4 h-full p-6 col-span-2 overflow-auto">
             <DraggableSection />
             <SectionCreation />
