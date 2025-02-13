@@ -39,6 +39,10 @@ body ::-webkit-scrollbar-thumb {
   }
 }
 
+.markdown {
+  scrollbar-gutter: stable;
+}
+
 .markdown > * {
   all: revert;
 }
@@ -53,6 +57,7 @@ body ::-webkit-scrollbar-thumb {
 
 .items-container {
   overflow-y: auto;
+  scrollbar-gutter: stable;
 }
 
 .gutter.gutter-horizontal {
