@@ -15,37 +15,35 @@ export const Preview = () => {
   // Investigate onClick={() => {navigator.clipboard.writeText(this.state.textToCopy)}}
 
   return (
-    <div className="pl-4 h-[calc(100vh_-_10.9rem)] overflow-auto pr-1">
-      <ReactMarkdown
-        className="markdown"
-        remarkPlugins={[remarkGfm]}
-        rehypePlugins={[rehypeRaw]}
-        components={{
-          code({ className, children, ...props }) {
-            const match = /language-(\w+)/.exec(className || '')
-            return match ? (
-              <SyntaxHighlighter
-                PreTag="div"
-                language={match[1]}
-                {...(props as ExtraProps)}
-                style={dracula}
-              >
-                {String(children).replace(/\n$/, '')}
-              </SyntaxHighlighter>
-            ) : (
-              <code className={className} {...props}>
-                {children}
-              </code>
-            )
-          },
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          a({ node, ...props }) {
-            return <a target="_blank" {...props} />
-          }
-        }}
-      >
-        {markdown}
-      </ReactMarkdown>
-    </div>
+    <ReactMarkdown
+      className="overflow-y-auto markdown pl-2 pr-4"
+      remarkPlugins={[remarkGfm]}
+      rehypePlugins={[rehypeRaw]}
+      components={{
+        code({ className, children, ...props }) {
+          const match = /language-(\w+)/.exec(className || '')
+          return match ? (
+            <SyntaxHighlighter
+              PreTag="div"
+              language={match[1]}
+              {...(props as ExtraProps)}
+              style={dracula}
+            >
+              {String(children).replace(/\n$/, '')}
+            </SyntaxHighlighter>
+          ) : (
+            <code className={className} {...props}>
+              {children}
+            </code>
+          )
+        },
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        a({ node, ...props }) {
+          return <a target="_blank" {...props} />
+        }
+      }}
+    >
+      {markdown}
+    </ReactMarkdown>
   )
 }
