@@ -29,25 +29,29 @@ export const SectionCreation = () => {
     []
   )
   return (
-    <>
+    <div className="flex flex-col gap-y-2.5">
       <h2 className="font-medium text-slate-500">Available Sections</h2>
-      <label>
-        <MagnifyingGlassIcon height="16" width="16" />
-        <input
-          onChange={handleFilterData}
-          placeholder="Search section..."
-          className="bg-white border-2 border-slate-200 text-slate-900 rounded-[4px] px-3 py-2  placeholder:text-slate-900 focus:outline-none focus:border-slate-500 focus:ring-1 focus:ring-slate-500"
-        />
-      </label>
 
-      <ul
-        className="flex flex-col gap-y-1 w-full flex-1 overflow-auto pr-1"
-        ref={parent}
-      >
-        {filteredData.map((section) => {
-          return <Section key={section.title} title={section.title} />
-        })}
-      </ul>
-    </>
+      <div className="flex flex-col gap-y-1.5">
+        <label className="relative">
+          <MagnifyingGlassIcon
+            className="absolute top-1/2 left-0 -translate-y-1/2 translate-x-4 text-slate-500"
+            height="16"
+            width="16"
+          />
+          <input
+            onChange={handleFilterData}
+            placeholder="Search section..."
+            className="bg-white border-2 border-slate-200 text-slate-900 rounded-md px-3 py-2 focus:outline-none focus:border-slate-500 focus:ring-1 focus:ring-slate-500 pl-10 w-full placeholder:text-slate-500"
+          />
+        </label>
+
+        <ul className="flex flex-col gap-y-1.5" ref={parent}>
+          {filteredData.map((section) => {
+            return <Section key={section.title} title={section.title} />
+          })}
+        </ul>
+      </div>
+    </div>
   )
 }

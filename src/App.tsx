@@ -13,20 +13,24 @@ function App() {
       <Toaster theme="light" />
       <Box className="bg-[#FAFAFA] text-slate-900">
         <Header />
-        <div className="w-screen h-screen overflow-hidden grid grid-cols-8 items-center">
-          <div className="relative flex flex-col gap-4 h-full p-6 col-span-2 overflow-auto">
+        <div className="grid grid-cols-[438px_2fr] gap-x-6">
+          <aside className="items-container slush-bg px-6 py-4 flex flex-col gap-y-3.5 border-r border-[#CBD5E1]">
             <DraggableSection />
             <SectionCreation />
-          </div>
+          </aside>
 
-          <div className="flex flex-col gap-8 w-auto pr-10 h-full p-4 col-span-6 ">
-            <div className="w-full flex-1 flex">
-              <Split className="split h-full flex-1">
-                <MonacoEditor />
-                <Preview />
-              </Split>
-            </div>
-          </div>
+          <section className="app-container bg-white -ml-6">
+            <Split
+              className="flex h-full gap-x-4"
+              minSize={[450, 700]}
+              expandToMin={true}
+              gutterSize={1}
+              snapOffset={0}
+            >
+              <MonacoEditor />
+              <Preview />
+            </Split>
+          </section>
         </div>
       </Box>
     </>

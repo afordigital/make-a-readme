@@ -2,7 +2,7 @@ import { useSectionsStore } from '../store/useSections'
 import { toast } from '@pheralb/toast'
 import placeholder from '../placeholders.json'
 import { Box, Button, Flex, Text } from '@radix-ui/themes'
-import { PlusCircledIcon } from '@radix-ui/react-icons'
+import { PlusIcon } from '@radix-ui/react-icons'
 
 type SectionProps = {
   title: string
@@ -29,13 +29,7 @@ export const Section = ({ title }: SectionProps) => {
   }
 
   return (
-    <Box
-      p="4"
-      style={{
-        backgroundColor: 'var(--gray-a2)',
-        borderRadius: 'var(--radius-3)'
-      }}
-    >
+    <Box className="bg-white rounded-md p-3 border-2 h-[48px]">
       <Flex gap="3" align="center" justify={'between'}>
         <Text weight="medium">{title}</Text>
         <Button
@@ -43,9 +37,9 @@ export const Section = ({ title }: SectionProps) => {
             handleAddSection(title)
           }}
           variant="ghost"
-          className="cursor-pointer"
+          className="cursor-pointer text-slate-600 hover:bg-slate-200 aspect-square size-7 p-0 -translate-x-1 -translate-y-0.5 transition-colors"
         >
-          <PlusCircledIcon />
+          <PlusIcon />
         </Button>
       </Flex>
     </Box>

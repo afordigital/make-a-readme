@@ -104,19 +104,23 @@ export const DraggableSection = () => {
       measuring={measuringConfig}
     >
       <SortableContext items={sections} strategy={verticalListSortingStrategy}>
-        <h2 className="font-medium text-slate-500">Current Sections</h2>
-        <ul className="overflow-hidden font-medium flex flex-col gap-[6px]">
-          {sections.map((section) => (
-            <SortableItem
-              key={section.id}
-              section={section}
-              onRemove={handleRemove}
-              onReset={handleResetSection}
-              onClick={handleActiveSection}
-              isSelected={activeSection?.id === section.id}
-            />
-          ))}
-        </ul>
+        {sections.length !== 0 && (
+          <div className="flex flex-col gap-y-2.5 border-b-2 pb-3.5">
+            <h2 className="font-medium text-slate-500">Current Sections</h2>
+            <ul className="font-medium flex flex-col gap-y-1.5">
+              {sections.map((section) => (
+                <SortableItem
+                  key={section.id}
+                  section={section}
+                  onRemove={handleRemove}
+                  onReset={handleResetSection}
+                  onClick={handleActiveSection}
+                  isSelected={activeSection?.id === section.id}
+                />
+              ))}
+            </ul>
+          </div>
+        )}
       </SortableContext>
     </DndContext>
   )

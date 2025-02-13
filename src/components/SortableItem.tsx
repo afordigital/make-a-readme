@@ -38,7 +38,7 @@ export function SortableItem({
     <li
       ref={setNodeRef}
       style={style}
-      className={`flex w-full group items-center h-[48px] border-2 ${
+      className={`flex w-full group items-center h-[48px] border-2 bg-white ${
         isSelected ? '' : ''
       } justify-between rounded-md p-3 cursor-pointer`}
       onClick={() => onClick(section.id)}
@@ -58,7 +58,7 @@ export function SortableItem({
             event.stopPropagation()
             onRemove(section.id)
           }}
-          className="group-hover:flex hidden hover:bg-red-100 items-center justify-center rounded-[4px] p-1 size-[32px]"
+          className="group-hover:flex hidden hover:bg-red-100 items-center transition-colors justify-center rounded-[4px] p-1 size-[32px]"
         >
           <X size={16} color="#C72527" />
         </button>
@@ -67,7 +67,7 @@ export function SortableItem({
             event.stopPropagation()
             onReset(section.id, section?.placeholderId ?? '')
           }}
-          className="group-hover:flex hidden hover:bg-slate-200 items-center justify-center rounded-[4px] p-1 size-[32px]"
+          className="group-hover:flex hidden hover:bg-slate-200 text-slate-600 items-center transition-colors justify-center rounded-[4px] p-1 size-[32px]"
         >
           <RotateCcw size={16} />
         </button>

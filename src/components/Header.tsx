@@ -2,7 +2,7 @@ import { Star } from 'lucide-react'
 
 export const Header = () => {
   return (
-    <header className="w-screen p-6 flex items-center justify-between border-b-[1px] border-b-[#CBD5E1]">
+    <header className="slush-bg w-screen p-6 flex items-center justify-between border-b-[1px] border-b-[#CBD5E1]">
       <div className="flex gap-4">
         <img
           src="/favicon.svg"
