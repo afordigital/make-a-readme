@@ -105,7 +105,7 @@ export const DraggableSection = () => {
     >
       <SortableContext items={sections} strategy={verticalListSortingStrategy}>
         {sections.length !== 0 && (
-          <div className="flex flex-col gap-y-2.5">
+          <div className="flex flex-col gap-y-2.5 border-b-2 pb-3.5">
             <h2 className="font-medium text-slate-500">Current Sections</h2>
             <ul className="font-medium flex flex-col gap-y-1.5">
               {sections.map((section) => (

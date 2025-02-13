@@ -29,7 +29,7 @@ export const SectionCreation = () => {
     []
   )
   return (
-    <div className="flex flex-col gap-y-2.5 pt-3">
+    <div className="flex flex-col gap-y-2.5">
       <h2 className="font-medium text-slate-500">Available Sections</h2>
 
       <div className="flex flex-col gap-y-1.5">

@@ -14,7 +14,7 @@ function App() {
       <Box className="bg-[#FAFAFA] text-slate-900">
         <Header />
         <div className="grid grid-cols-[438px_2fr] gap-x-6">
-          <aside className="items-container px-6 py-4 flex flex-col gap-y-4 border-r border-[#CBD5E1] divide-y-2">
+          <aside className="items-container px-6 py-4 flex flex-col gap-y-3.5 border-r border-[#CBD5E1]">
             <DraggableSection />
             <SectionCreation />
           </aside>
