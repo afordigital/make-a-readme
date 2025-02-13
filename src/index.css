@@ -39,6 +39,10 @@ body ::-webkit-scrollbar-thumb {
   }
 }
 
+.slush-bg {
+  background: url(/images/slush.webp);
+}
+
 .markdown {
   scrollbar-gutter: stable;
 }
