@@ -26,19 +26,26 @@ export const MonacoEditor = () => {
   }
 
   return (
-    <div className="flex-1 overflow-hidden">
-      <Editor
-        height={'100%'}
-        theme="OneDarkPro"
-        options={{ minimap: { enabled: false } }}
-        defaultLanguage="markdown"
-        value={activeSection?.content ?? ''}
-        beforeMount={handleEditorDidMount}
-        onChange={(value) => {
-          if (!value) return
-          handleUpdateSection(value)
-        }}
-      />
-    </div>
+    <Editor
+      className="-ml-4 h-full pt-8"
+      theme="OneDarkPro"
+      options={{
+        minimap: { enabled: false },
+        scrollbar: { vertical: 'hidden' },
+        scrollBeyondLastLine: false,
+        wordWrap: 'on',
+        overviewRulerLanes: 0,
+        renderLineHighlight: 'none',
+        guides: { indentation: false },
+        lineNumbers: 'off'
+      }}
+      defaultLanguage="markdown"
+      value={activeSection?.content ?? ''}
+      beforeMount={handleEditorDidMount}
+      onChange={(value) => {
+        if (!value) return
+        handleUpdateSection(value)
+      }}
+    />
   )
 }
