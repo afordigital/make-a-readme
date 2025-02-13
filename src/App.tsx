@@ -14,19 +14,17 @@ function App() {
       <Box className="bg-[#FAFAFA] text-slate-900">
         <Header />
         <div className="grid grid-cols-[438px_2fr] gap-x-6">
-          <div className="relative flex flex-col gap-4 h-full p-6 col-span-2 overflow-auto">
+          <aside className="items-container px-6 py-4 flex flex-col gap-y-6 border-r border-[#CBD5E1]">
             <DraggableSection />
             <SectionCreation />
-          </div>
+          </aside>
 
-          <div className="flex flex-col gap-8 w-auto pr-10 h-full p-4 col-span-6 ">
-            <div className="w-full flex-1 flex">
-              <Split className="split h-full flex-1">
-                <MonacoEditor />
-                <Preview />
-              </Split>
-            </div>
-          </div>
+          <section className="app-container">
+            <Split className="flex h-full gap-x-4">
+              <MonacoEditor />
+              <Preview />
+            </Split>
+          </section>
         </div>
       </Box>
     </>
