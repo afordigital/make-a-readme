@@ -20,7 +20,13 @@ function App() {
           </aside>
 
           <section className="app-container">
-            <Split className="flex h-full gap-x-4">
+            <Split
+              className="flex h-full gap-x-4"
+              minSize={[450, 700]}
+              expandToMin={true}
+              gutterSize={1}
+              snapOffset={0}
+            >
               <MonacoEditor />
               <Preview />
             </Split>
