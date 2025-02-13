@@ -14,30 +14,28 @@ html {
 
 body {
   font-family: 'Inter', sans-serif;
-  --sb-track-color: #121314;
-  --sb-thumb-color: #1f2123;
-  --sb-size: 14px;
+  --scrollbar-track-color: transparent;
+  --scrollbar-thumb-color: #cbd5e1;
+  --scrollbar-size: 7px;
 
   @apply w-screen h-screen overflow-hidden;
 }
 
 body ::-webkit-scrollbar {
-  width: var(--sb-size);
+  width: var(--scrollbar-size);
 }
 
 body ::-webkit-scrollbar-track {
-  background: var(--sb-track-color);
-  border-radius: 3px;
+  background: var(--scrollbar-track-color);
 }
 
 body ::-webkit-scrollbar-thumb {
-  background: var(--sb-thumb-color);
-  border-radius: 3px;
+  background: var(--scrollbar-thumb-color);
 }
 
 @supports not selector(::-webkit-scrollbar) {
   body {
-    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+    scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-track-color);
   }
 }
 
