@@ -14,12 +14,12 @@ function App() {
       <Box className="bg-[#FAFAFA] text-slate-900">
         <Header />
         <div className="grid grid-cols-[438px_2fr] gap-x-6">
-          <aside className="items-container px-6 py-4 flex flex-col gap-y-6 border-r border-[#CBD5E1]">
+          <aside className="items-container px-6 py-4 flex flex-col gap-y-4 border-r border-[#CBD5E1] divide-y-2">
             <DraggableSection />
             <SectionCreation />
           </aside>
 
-          <section className="app-container">
+          <section className="app-container bg-white">
             <Split
               className="flex h-full gap-x-4"
               minSize={[450, 700]}

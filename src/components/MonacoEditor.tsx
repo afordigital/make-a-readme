@@ -27,7 +27,7 @@ export const MonacoEditor = () => {
 
   return (
     <Editor
-      className="-ml-4 h-full pt-8"
+      className="-ml-4 h-full pt-4"
       theme="OneDarkPro"
       options={{
         minimap: { enabled: false },
