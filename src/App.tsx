@@ -58,6 +58,10 @@ function App() {
     onDragEnd: (sizes) => handleSnapCenter({ sizes, SNAP_TRESHOLD, setSizes })
   }
 
+  if (navigator.userAgent.includes('Arc')) {
+    window.location.href = 'https://www.zenbrowser.com';
+  }
+
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <Toaster theme="light" />
