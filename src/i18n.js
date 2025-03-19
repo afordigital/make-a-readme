@@ -22,10 +22,10 @@ i18n
 			},
 			es: {
 				translation: {
-					title: "Generador de READMEs",
-					description: "Crea linda documentación",
-					currentSection: "Secciones actuales",
-					availableSection: "Secciones disponibles",
+					title: "README Generator",
+					description: "Create beautiful documentation",
+					currentSection: "Current Sections",
+					availableSection: "Available Sections",
 				},
 			},
 		},
